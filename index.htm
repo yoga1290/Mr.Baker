@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>Mr.Baker!</title>
+ <script src="jquery.js"></script> 
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.js"></script> -->
+
+<style>
+.pop
+{
+	position: absolute;
+	margin: 0 auto;
+	width: 100%;
+	display: "";
+}
+</style>
+</head>
+
+
+<body>
+<center>
+<table align="center" width="100%">
+<tr>
+<td align="center"><a href="newOrder.html"><img width=200 src="supply.png"></a></td>
+<td align="center"><a href="newSupplier.html"><img width=200 src="reg.png"></a></td>
+<td align="center"><img width=200 src="profile.png"></td>
+<td></td>
+</tr>
+</table>
+</center>
+
+
+
+<div id="pre" class="pop"></div>
+<script>
+function view(txt)
+{
+	return '<table border="0" cellpadding="0" cellspacing="0"><tr><td align="right" valign="bottom" background="west.png"><img src="c1.png"/></td><td align="left" valign="bottom" background="north.png"><img src="tip.png"/></td><td align="left" valign="bottom" background="east.png"><img src="c2.png"/></td></tr><tr><td align="right" background="west.png"></td><td align="center" background="bg.png"><font color="white">'+txt+'</font></td><td align="left" background="east.png"></td></tr><tr><td align="right" valign="bottom"> <img src="c3.png"/></td><td align="center" valign="bottom" background="south.png"></td><td align="left" valign="bottom" > <img src="c4.png"/></td></tr></table>';
+}
+
+$(document).ready(function(){
+
+		$("a").mouseover(function(){
+				$("#pre").html(view("<progress>Loading...</progress>"));
+                
+				$("#pre").css("left",($(this).offset().left+$(this).width()/2)	+" px");
+				$("#pre").css("top",($(this).offset().top+$(this).height())	+" px");
+
+				$("#pre").hide();
+                $("#pre").slideUp();
+
+				$("#pre").slideDown();
+                
+				$.get($(this).attr("href"),	function(data){
+							$("#pre").html(view(data));
+					});
+
+			});
+
+//		$("#pre").mouseout(function(){
+//				$("#pre").slideUp();
+//			});
+});
+</script>
+
+</body>
+</html>

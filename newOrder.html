@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>Mr.Baker!</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.js"></script>
+
+</head>
+<body>
+<form>
+
+<div id="div_newCustomer">
+<input id="customer_name" type="text" placeholder="Customer Name"><br>
+</div>
+
+<input type="text" placeholder="Product Name"><br>
+<div id="new_product"></div>
+</form>
+
+<div id="bla"></div>
+<button id="see">see inputs</button>
+<script>
+$("#customer_name").change(
+    function(d)
+    {
+       $.get('getCustomers.php?Name='+$("#customer_name").val(), function(data) {
+            alert(data);
+            if(data.indexOf("None")==-1)
+                alert("People with same name="+data);
+            else
+                $.get("newCustomer.html",function(data){$("#div_newCustomer").html(data);});
+        });
+        $("#div_newCustomer").html("<progress>Checking Database...</progress>");
+    });
+    
+$("#see").click(function(){
+    var i;
+    var txt="";
+    for(i=0;i<$("input").size();i++)
+        txt+=$("input").get(i).id+"="+$("input").eq(i).val()+"<br>";
+    $("#bla").html(txt);
+});
+</script>
+</body>
+</html>
