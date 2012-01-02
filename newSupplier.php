@@ -8,7 +8,7 @@
 mysql_connect('fdb2.awardspace.com','yoga1290_project','yoga1290');
 @mysql_select_db('yoga1290_project') or die( "Unable to select database");
 
-$query="INSERT INTO Suppliers (Name,TypeOfProductsSupplied) VALUES ('".$_POST['sname']."','".$_POST['stype']."')";
+$query="INSERT INTO Suppliers (Name,TypeOfProductsSupplied) VALUES ('".$_POST['Suppliers_Name']."','".$_POST['Suppliers_Type']."')";
 
 
 mysql_query($query) or die("Sorry,Something went wrong!");
