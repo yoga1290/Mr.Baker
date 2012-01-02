@@ -7,58 +7,60 @@
 <body>
 <form>
 
-<div id="div_customer">
-<input id="Customer_Name" name="Customer_Name" type="text" placeholder="Customer Name"><br>
+<div id="div_supplier">
+<input id="Suppliers_Name" name="Suppliers_Name" type="text" placeholder="Supplier Name"><br>
 </div>
 
 <div id="div_product">
 <input type="text" placeholder="Product Name" id="Products_Name" name="Products_Name"><br>
 </div>
+
 </form>
 
 <div id="bla"></div>
 <button id="see">see inputs</button>
 <script>
 //Whenever the Product Name text field is changed:
-$("#Customer_Name").change(
+$("#Suppliers_Name").change(
     function(d)
     {
         //save the value of what's typed b4 removing the view or setting the Check DB progress
         
-        var queryName=$("#Customer_Name").val();
-        $("#div_customer").html("<progress>Checking Database...</progress>");
-       $.get('getCustomers.php?Customer_Name='+queryName, 
+        var queryName=$("#Suppliers_Name").val();
+        $("#div_supplier").html("<progress>Checking Database...</progress>");
+       $.get('getSuppliers.php?Suppliers_Name='+queryName, 
         function(data)
         {   
+            alert("Query>"+data);
             //If the SQL query found smth:
             if(data.indexOf("None")==-1)
             {
                 // Add a new drop-down menu,listing Customers Names:
                 
-                var txt="<select id='Customer_idCustomer' name='Customer_idCustomer'>";
+                var txt="<select id='Suppliers_idSuppliers' name='Customer_idCustomer'>";
                 var ar=data.split("\n");
                 for(var i=0;i<ar.length;i++)
                 {
-                    var cid=ar[i].substring(0,ar[i].indexOf(':'));
-                    var cname=ar[i].substring(ar[i].indexOf(':')+1,ar[i].length);
-                    txt+="<option value='"+cid+"'>"+cname+" ["+cid+"]</option>";
+                    var sid=ar[i].substring(0,ar[i].indexOf(':'));
+                    var sname=ar[i].substring(ar[i].indexOf(':')+1,ar[i].length);
+                    txt+="<option value='"+sid+"'>"+sname+" ["+cid+"]</option>";
                 }
                 txt+="<option value='-1'>Other</option>";
                 txt+="</select><br>";
-                $("#div_customer").html(txt);
+                $("#div_supplier").html(txt);
                 
                 
                 
                 // Setting a Change Event for this frop-down menu:
                 
-                $("select#Customer_idCustomer").change(function(){
+                $("select#Suppliers_idSuppliers").change(function(){
                 
                     $("select#Customer_idCustomer option:selected").each(function(){
                         
                             if($(this).val()=="-1")
                             {
-                                $("#div_customer").html("<progress>Loading...</progress>");
-                                $.get("newCustomer.html",function(data){$("#div_customer").html(data);});
+                                $("#div_supplier").html("<progress>Loading...</progress>");
+                                $.get("newSupplier.html",function(data){$("#div_supplier").html(data);});
                             }
                         
                         });
@@ -66,7 +68,7 @@ $("#Customer_Name").change(
                     });
             }
             else
-                $.get("newCustomer.html",function(data){$("#div_customer").html(data);});
+                $.get("newSupplier.html",function(data){$("#div_customer").html(data);});
         });
         
     });
@@ -117,7 +119,7 @@ $("#Products_Name").change(
                             }
                         
                         });
-                    
+
                     });
             }
             else

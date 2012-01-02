@@ -1,8 +1,11 @@
 <html>
 <head>
 <title>Mr.Baker!</title>
- <script src="jquery.js"></script> 
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.js"></script> -->
+<!-- using jQuery library hosted on Google, everywhere fast servers
+
+Most probably,it's cashed in your machine b4 even loading this page ;) -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.js"></script>
 
 <style>
 .pop
@@ -20,17 +23,21 @@
 <center>
 <table align="center" width="100%">
 <tr>
-<td align="center"><a href="newOrder.html"><img width=200 src="supply.png"></a></td>
-<td align="center"><a href="newSupplier.html"><img width=200 src="reg.png"></a></td>
-<td align="center"><img width=200 src="profile.png"></td>
+<td align="right"><a href="newOrder.html"><img alt="Order Now" width=200 src="reg.png"></a></td>
+
+<td align="center"><a href="supplyus.html"><img width=200 src="supply.png" alt="Supply Us"></a></td>
+
+<td align="left"><a href="aboutus.html"><img width=200 src="profile.png" alt="Contact Us"></a></td>
 <td></td>
 </tr>
 </table>
 </center>
 
 
-
+<!-- The popping flexable div ;) -->
 <div id="pre" class="pop"></div>
+
+
 <script>
 function view(txt)
 {
