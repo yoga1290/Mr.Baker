@@ -5,7 +5,7 @@ mysql_connect('fdb2.awardspace.com','yoga1290_project','yoga1290');
 $Suppliers_idSuppliers=-1;
 if (isset($_POST['Suppliers_idSuppliers']))
  $Suppliers_idSuppliers=$_POST['Suppliers_idSuppliers'];
-else
+else if(isset($_POST['Suppliers_Name']))
 {
    $query="INSERT INTO Suppliers (Name,TypeOfProductsSupplied) VALUES ('".$_POST['Suppliers_Name']."','".$_POST['Suppliers_Type']."')";
    mysql_query($query) or die("Sorry,Something went wrong!");
@@ -18,7 +18,7 @@ $Products_idProducts=-1;
 if (isset($_POST['Products_idProducts']))
   $Products_idProducts=$_POST['Products_idProducts'];
 // Else If : Supplying this product
-else
+else if(isset($_POST['Products_Name']))
 {
 // $Suppliers_idSuppliers is REQUIRED
   $query="INSERT INTO Products (Name,Price,NumberInStock,Type,SuppID) VALUES ('".$_POST['Products_Name']."','".$_POST['Products_Price']."','".$_POST['Products_NumberInStock']."','".$_POST['Products_Type']."','".$Suppliers_idSuppliers."')";
@@ -33,7 +33,7 @@ else
 $Customer_idCustomer=-1;
 if (isset($_POST['Customer_idCustomer']))
  $Customer_idCustomer=$_POST['Customer_idCustomer'];
-else
+else if(isset($_POST['Customer_Name']))
 {
 //FavID=$Products_idProducts
  $query="INSERT INTO Customer (Name,Price,PhoneNumber,Type,Email) VALUES ('".$_POST['Customer_Name']."','".$_POST['Customer_PhoneNumber']."','".$_POST['Customer_Email']."')";
