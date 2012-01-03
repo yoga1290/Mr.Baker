@@ -4,7 +4,7 @@ mysql_connect('fdb2.awardspace.com','yoga1290_project','yoga1290');
 @mysql_select_db('yoga1290_project') or die( "Unable to select database");
 
 // SQL query:
-$query="SELECT Name,idProducts FROM Products WHERE Name like '%".$_GET['name']."%'";
+$query="SELECT Name,idProducts FROM Products WHERE Name like '%".$_GET['Products_Name']."%'";
 $result=mysql_query($query) or die( "alert('Something went wrong!');");
 
 

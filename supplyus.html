@@ -28,16 +28,16 @@ $("#Suppliers_Name").change(
         
         var queryName=$("#Suppliers_Name").val();
         $("#div_supplier").html("<progress>Checking Database...</progress>");
-       $.get('getSuppliers.php?Suppliers_Name='+queryName, 
+       $.get('getSuppliers.php?Suppliers_Name='+queryName,
         function(data)
-        {   
+        {
             alert("Query>"+data);
             //If the SQL query found smth:
             if(data.indexOf("None")==-1)
             {
                 // Add a new drop-down menu,listing Customers Names:
                 
-                var txt="<select id='Suppliers_idSuppliers' name='Customer_idCustomer'>";
+                var txt="<select id='Suppliers_idSuppliers' name='Suppliers_idSuppliers'>";
                 var ar=data.split("\n");
                 for(var i=0;i<ar.length;i++)
                 {
@@ -68,7 +68,7 @@ $("#Suppliers_Name").change(
                     });
             }
             else
-                $.get("newSupplier.html",function(data){$("#div_customer").html(data);});
+                $.get("newSupplier.html",function(data){$("#div_supplier").html(data);});
         });
         
     });

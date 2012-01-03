@@ -52,6 +52,8 @@ $(document).ready(function(){
 				$("#pre").css("left",($(this).offset().left+$(this).width()/2)	+" px");
 				$("#pre").css("top",($(this).offset().top+$(this).height())	+" px");
 
+				$("#pre").offset({ top: ($(this).offset().top+$(this).height()), left: ($(this).offset().left+$(this).width()/2)})
+
 				$("#pre").hide();
                 $("#pre").slideUp();
 
