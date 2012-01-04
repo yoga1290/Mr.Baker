@@ -1,8 +1,9 @@
+
 -- -----------------------------------------------------
 -- Table `Employee`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Employee` (
-  `idEmployee` INT NOT NULL ,
+  `idEmployee` INT NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(45) NULL ,
   `PhoneNumber` VARCHAR(45) NULL ,
   `Email` VARCHAR(45) NULL ,
@@ -29,7 +30,7 @@ ENGINE = InnoDB;
 -- Table `Products`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Products` (
-  `idProducts` INT NOT NULL ,
+  `idProducts` INT NOT NULL AUTO_INCREMENT ,
   `Name` VARCHAR(45) NOT NULL ,
   `Price` VARCHAR(45) NOT NULL ,
   `NumberInStock` INT NOT NULL ,
@@ -50,7 +51,7 @@ ENGINE = InnoDB;
 -- Table `Customer`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Customer` (
-  `idCustomer` INT NOT NULL ,
+  `idCustomer` INT NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(45) NOT NULL ,
   `PhoneNumber` VARCHAR(45) NOT NULL ,
   `FaveID` INT NOT NULL ,
@@ -69,8 +70,9 @@ ENGINE = InnoDB;
 -- Table `Delivery`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Delivery` (
-  `idDelivery` INT NOT NULL ,
-  `Date` DATE NULL ,
+  `idDelivery` INT NOT NULL AUTO_INCREMENT,
+  `Date` DATE NOT NULL ,
+  `Address` VARCHAR(100) NOT NULL ,
   PRIMARY KEY (`idDelivery`) ,
   INDEX `idDelivery` (`idDelivery` ASC) )
 ENGINE = InnoDB;
@@ -80,14 +82,14 @@ ENGINE = InnoDB;
 -- Table `Orders`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Orders` (
-  `DelID` INT NOT NULL ,
+  `DelID` INT NULL ,
   `ProdID` INT NOT NULL ,
   `CustID` INT NOT NULL ,
   `EmpID` INT NOT NULL ,
   INDEX `idDelivery` (`DelID` ASC) ,
   INDEX `idCustomer` (`CustID` ASC) ,
   INDEX `idProducts` (`ProdID` ASC) ,
-  PRIMARY KEY (`DelID`, `ProdID`, `CustID`, `EmpID`) ,
+  PRIMARY KEY (`ProdID`, `CustID`, `EmpID`) ,
   INDEX `idEmp` (`EmpID` ASC) ,
   CONSTRAINT `idDelivery`
     FOREIGN KEY (`DelID` )
