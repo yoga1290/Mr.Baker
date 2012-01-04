@@ -5,25 +5,25 @@
 
 </head>
 <body>
-<form>
+<form method="post" action="Submit.php">
 
 <div id="div_product">
 <input type="text" placeholder="Product Name" id="Products_Name" name="Products_Name"><br>
 </div>
 
+<button type="submit">Submit</button>
 </form>
 
-<div id="bla"></div>
-<button id="see">see inputs</button>
+
 <script>
 
 //Whenever the Product Name text field is changed:
-$("#Products_Name").change(
+$("input#Products_Name").change(
     function(d)
     {
         //save the value of what's typed b4 removing the view or setting the Check DB progress
         
-        var queryName=$("#Products_Name").val();
+        var queryName=$("input#Products_Name").val();
         $("#div_product").html("<progress>Checking Database...</progress>");
        $.get('getProducts.php?Products_Name='+queryName,
         function(data)
@@ -59,7 +59,7 @@ $("#Products_Name").change(
                                         $("#div_product").html(data);
                                         
                                         //Start Supplier Check
-                                        $("#Products_Supplier_Name").change(
+                                        $("input#Products_Supplier_Name").change(
                             
                                             function(d)
                                                 {
@@ -180,17 +180,8 @@ $("#Products_Name").change(
                                                 });
                                     });
             }
-//                $.get("newProduct.html",function(data){$("#div_product").html(data);});
         });
     });
-    
-$("#see").click(function(){
-    var i;
-    var txt="";
-    for(i=0;i<$("input").size();i++)
-        txt+=$("input").get(i).id+"="+$("input").eq(i).val()+"<br>";
-    $("#bla").html(txt);
-});
 </script>
 </body>
 </html>

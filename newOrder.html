@@ -5,30 +5,46 @@
 
 </head>
 <body>
-<form>
+<form method="post" action="Submit.php">
 
 <div id="div_customer">
-<input id="Customer_Name" name="Customer_Name" type="text" placeholder="Customer Name"><br>
+<input id="Customer_Name" name="Customer_Name" type="text" placeholder="Customer Name">
 </div>
+<br>
 
 <div id="div_product">
-<input type="text" placeholder="Product Name" id="Products_Name" name="Products_Name"><br>
+<input type="text" placeholder="Product Name" id="Products_Name" name="Products_Name">
 </div>
+<br>
 
 <div id="div_emp">
-<input type="text" placeholder="Employee in Charge" id="Employee_Name" name="Employee_Name"><br>
+<input type="text" placeholder="Employee in Charge" id="Employee_Name" name="Employee_Name">
 </div>
-
-<input type="date" id="Delivery_Date" name="Delivery_Date">
 <br>
+
+<input type="checkbox" id="chk_del"> Delivery<br>
+
+<div id="div_del"></div>
+
 <button type="submit">Submit</button>
 </form>
 
-<div id="bla"></div>
-<button id="see">see inputs</button>
 <script>
+
+$("#chk_del").change(
+    function()
+    {
+        if(this.checked)
+        {
+            $("#div_del").html("<progress>Loading...</progress>");
+            $.get("newDelivery.html",function(data){$("#div_del").html(data);});
+        }
+        else
+            $("#div_del").html("");
+    });
+
 //Whenever the Customer Name text field is changed:
-$("#Customer_Name").change(
+$("input#Customer_Name").change(
     function(d)
     {
         //save the value of what's typed b4 removing the view or setting the Check DB progress
@@ -88,12 +104,12 @@ $("#Customer_Name").change(
 
 
 //Whenever the Product Name text field is changed:
-$("#Products_Name").change(
+$("input#Products_Name").change(
     function(d)
     {
         //save the value of what's typed b4 removing the view or setting the Check DB progress
         
-        var queryName=$("#Products_Name").val();
+        var queryName=$("input#Products_Name").val();
         $("#div_product").html("<progress>Checking Database...</progress>");
        $.get('getProducts.php?Products_Name='+queryName,
         function(data)
@@ -129,7 +145,7 @@ $("#Products_Name").change(
                                         $("#div_product").html(data);
                                         
                                         //Start Supplier Check
-                                        $("#Products_Supplier_Name").change(
+                                        $("input#Products_Supplier_Name").change(
                             
                                             function(d)
                                                 {
@@ -265,7 +281,7 @@ $("#Employee_Name").change(
         //save the value of what's typed b4 removing the view or setting the Check DB progress
         
         var queryName=$("#Employee_Name").val();
-        $("#div_customer").html("<progress>Checking Database...</progress>");
+        $("div#div_emp").html("<progress>Checking Database...</progress>");
        $.get('getEmployees.php?Employee_Name='+queryName, 
         function(data)
         {   
@@ -310,7 +326,7 @@ $("#Employee_Name").change(
         
     });
     
-            
+/*            
 $("#see").click(function(){
     var i;
     var txt="";
@@ -318,6 +334,7 @@ $("#see").click(function(){
         txt+=$("input").get(i).id+"="+$("input").eq(i).val()+"<br>";
     $("#bla").html(txt);
 });
+*/
 </script>
 </body>
 </html>

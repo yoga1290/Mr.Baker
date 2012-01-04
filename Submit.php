@@ -89,7 +89,11 @@ if (isset($_POST['Delivery_idDelivery'])) //I think this is useless check,but,wo
  $Delivery_idDelivery=$_POST['Delivery_idDelivery'];
 else if(isset($_POST['Employee_Name']))
 {
- $query="INSERT INTO Delivery (Date) VALUES ('".$_POST['Delivery_Date']."')";
+    if(strtotime(date("Y-m-d")) > strtotime( date("Y").$_POST['sel_date_month']."-".$_POST['sel_date_day']) )
+        $query="INSERT INTO Delivery (Date) VALUES ('".date("Y").$_POST['sel_date_month']."-".$_POST['sel_date_day']."')";
+    else
+        if(strtotime(date("Y-m-d")) > strtotime( (date("Y")+1).$_POST['sel_date_month']."-".$_POST['sel_date_day']) )
+        $query="INSERT INTO Delivery (Date) VALUES ('".date("Y").$_POST['sel_date_month']."-".$_POST['sel_date_day']."')";
  
   mysql_query($query) or die(mysql_error());
   
