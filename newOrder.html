@@ -15,6 +15,10 @@
 <input type="text" placeholder="Product Name" id="Products_Name" name="Products_Name"><br>
 </div>
 
+<div id="div_emp">
+<input type="text" placeholder="Employee in Charge" id="Employee_Name" name="Employee_Name"><br>
+</div>
+
 <input type="date" id="Delivery_Date" name="Delivery_Date">
 <br>
 <button type="submit">Submit</button>
@@ -23,7 +27,7 @@
 <div id="bla"></div>
 <button id="see">see inputs</button>
 <script>
-//Whenever the Product Name text field is changed:
+//Whenever the Customer Name text field is changed:
 $("#Customer_Name").change(
     function(d)
     {
@@ -250,6 +254,63 @@ $("#Products_Name").change(
         });
     });
     
+    
+    
+    
+//Whenever the Employee Name text field is changed:
+
+$("#Employee_Name").change(
+    function(d)
+    {
+        //save the value of what's typed b4 removing the view or setting the Check DB progress
+        
+        var queryName=$("#Employee_Name").val();
+        $("#div_customer").html("<progress>Checking Database...</progress>");
+       $.get('getEmployees.php?Employee_Name='+queryName, 
+        function(data)
+        {   
+            //If the SQL query found smth:
+            if(data.indexOf("None")==-1)
+            {
+                // Add a new drop-down menu,listing Customers Names:
+                
+                var txt="<select id='Employee_idEmployee' name='Employee_idEmployee'>";
+                var ar=data.split("\n");
+                for(var i=0;i<ar.length;i++)
+                {
+                    var cid=ar[i].substring(0,ar[i].indexOf(':'));
+                    var cname=ar[i].substring(ar[i].indexOf(':')+1,ar[i].length);
+                    txt+="<option value='"+cid+"'>"+cname+" ["+cid+"]</option>";
+                }
+                txt+="<option value='-1'>Other</option>";
+                txt+="</select><br>";
+                $("#div_emp").html(txt);
+                
+                
+                
+                // Setting a Change Event for this frop-down menu:
+                
+                $("select#Customer_idCustomer").change(function(){
+                
+                    $("select#Customer_idCustomer option:selected").each(function(){
+                        
+                            if($(this).val()=="-1")
+                            {
+                                $("#div_emp").html("<progress>Loading...</progress>");
+                                $.get("newEmployee.html",function(data){$("#div_emp").html(data);});
+                            }
+                        
+                        });
+                    
+                    });
+            }
+            else
+                $.get("newEmployee.html",function(data){$("#div_emp").html(data);});
+        });
+        
+    });
+    
+            
 $("#see").click(function(){
     var i;
     var txt="";
