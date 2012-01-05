@@ -100,7 +100,7 @@ if (isset($_POST["Delivery_idDelivery"])) //I think this is useless check,but,wo
  $Delivery_idDelivery=$_POST["Delivery_idDelivery"];
 else if(isset($_POST["Employee_Name"]))
 {
-    if(strtotime(date("Y-m-d")) > strtotime( date("Y").$_POST["sel_date_month"]."-".$_POST["sel_date_day"]) )
+    if(strtotime(date("Y-m-d")) > strtotime( date("Y")."-".$_POST["sel_date_month"]."-".$_POST["sel_date_day"]) )
         $query="INSERT INTO Delivery (Date) VALUES ('".date("Y").$_POST["sel_date_month"]."-".$_POST["sel_date_day"]."')";
     else
         if(strtotime(date("Y-m-d")) > strtotime( (date("Y")+1).$_POST["sel_date_month"]."-".$_POST["sel_date_day"]) )
