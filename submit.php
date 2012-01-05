@@ -5,7 +5,7 @@
 <body>
 <?php
 mysql_connect('fdb2.awardspace.com','yoga1290_project','yoga1290');
-@mysql_select_db('yoga1290_project') or die("Something went wrong<br>");
+@mysql_select_db('yoga1290_project') or die(mysql_error());
 
 //INSERT INTO Suppliers
 
@@ -16,9 +16,9 @@ else if(isset($_POST["Suppliers_Name"]))
 {
    $query="INSERT INTO Suppliers (Name,TypeOfProductsSupplied) VALUES ('".$_POST["Suppliers_Name"]."','".$_POST["Suppliers_TypeOfProductsSupplied"]."')";
    
-   mysql_query($query) or die("Something went wrong<br>");
+   mysql_query($query) or die(mysql_error());
    
-   $idQuery = mysql_query('SELECT COUNT(*) FROM Suppliers') or die("Something went wrong<br>");
+   $idQuery = mysql_query('SELECT COUNT(*) FROM Suppliers') or die(mysql_error());
    
    $Suppliers_idSuppliers = mysql_result($idQuery, 0)+1;
    
@@ -40,8 +40,8 @@ else if(isset($_POST["Products_Name"]))
 
   $query="INSERT INTO Products (Name,Price,NumberInStock,Type,SuppID) VALUES ('".$_POST["Products_Name"]."','".$_POST["Products_Price"]."','".$_POST["Products_NumberInStock"]."','".$_POST["Products_Type"]."','".$Suppliers_idSuppliers."')";
 
-  mysql_query($query) or die("Something went wrong<br>");
-  $idQuery = mysql_query('SELECT COUNT(*) FROM Products') or die("Something went wrong<br>");
+  mysql_query($query) or die(mysql_error());
+  $idQuery = mysql_query('SELECT COUNT(*) FROM Products') or die(mysql_error());
   
   $Products_idProducts = mysql_result($idQuery, 0)+1;
   echo $query."<br>";
@@ -61,8 +61,8 @@ else if(isset($_POST["Customer_Name"]))
 
  $query="INSERT INTO Customer (Name,Price,PhoneNumber,Type,Email,FaveID) VALUES ('".$_POST["Customer_Name"]."','".$_POST["Customer_PhoneNumber"]."','".$_POST["Customer_Email"]."','"+$Products_idProducts+"')";
  
-  mysql_query($query) or die("Something went wrong<br>");
-  $idQuery = mysql_query('SELECT COUNT(*) FROM Customer') or die("Something went wrong<br>");
+  mysql_query($query) or die(mysql_error());
+  $idQuery = mysql_query('SELECT COUNT(*) FROM Customer') or die(mysql_error());
   
   $Customer_idCustomer = mysql_result($idQuery, 0)+1;
   
@@ -83,8 +83,8 @@ else if(isset($_POST["Employee_Name"]))
 
  $query="INSERT INTO Employee (Name,Price,PhoneNumber,Email,SalCategory,Position) VALUES ('".$_POST["Employee_Name"]."','".$_POST["Employee_PhoneNumber"]."','".$_POST["Employee_Email"]."','".$_POST["Employee_SalCategory"]+"','".$_POST["Employee_Position"]."')";
  
-  mysql_query($query) or die("Something went wrong<br>");
-  $idQuery = mysql_query('SELECT COUNT(*) FROM Employee') or die("Something went wrong<br>");
+  mysql_query($query) or die(mysql_error());
+  $idQuery = mysql_query('SELECT COUNT(*) FROM Employee') or die(mysql_error());
   
   $Employee_idEmployee = mysql_result($idQuery, 0)+1;
   
@@ -106,9 +106,9 @@ else if(isset($_POST["Employee_Name"]))
         if(strtotime(date("Y-m-d")) > strtotime( (date("Y")+1).$_POST["sel_date_month"]."-".$_POST["sel_date_day"]) )
         $query="INSERT INTO Delivery (Date) VALUES ('".date("Y").$_POST["sel_date_month"]."-".$_POST["sel_date_day"]."')";
  
-  mysql_query($query) or die("Something went wrong<br>");
+  mysql_query($query) or die(mysql_error());
   
-  $idQuery = mysql_query('SELECT COUNT(*) FROM Delivery') or die("Something went wrong<br>");
+  $idQuery = mysql_query('SELECT COUNT(*) FROM Delivery') or die(mysql_error());
   $Delivery_idDelivery = mysql_result($idQuery, 0)+1;
   
   echo $query."<br>";
@@ -125,7 +125,7 @@ if( $Delivery_idDelivery!=-1    &&
     )
 {
  $query="INSERT INTO Orders (DelID,ProdID,CustID,EmpID) VALUES ('".$Delivery_idDelivery."','".$Products_idProducts."','".$Customer_idCustomer."','".$Employee_idEmployee."')";
- mysql_query($query) or die("Something went wrong<br>");
+ mysql_query($query) or die(mysql_error());
  
  echo $query."<br>";
 }
