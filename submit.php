@@ -32,8 +32,11 @@ else if(isset($_POST["Suppliers_Name"]))
 
 $Products_idProducts=-1;
 if (isset($_POST["Products_idProducts"]))
+{
   $Products_idProducts=$_POST["Products_idProducts"];
-// Else If : Supplying this product
+	if( isset($_POST["Products_NumberInStock"]) )
+		mysql_query("UPDATE Products SET NumberInStock=".$_POST["Products_NumberInStock"]."   WHERE idProducts=".$Products_idProducts) or die(mysql_error());
+}
 else if(isset($_POST["Products_Name"]))
 {
 // $Suppliers_idSuppliers is REQUIRED
@@ -81,7 +84,7 @@ else if(isset($_POST["Employee_Name"]))
 {
 //FaveID=$Products_idProducts
 
- $query="INSERT INTO Employee (Name,Price,PhoneNumber,Email,SalCategory,Position) VALUES ('".$_POST["Employee_Name"]."','".$_POST["Employee_PhoneNumber"]."','".$_POST["Employee_Email"]."','".$_POST["Employee_SalCategory"]+"','".$_POST["Employee_Position"]."')";
+ $query="INSERT INTO Employee (Name,PhoneNumber,Email,SalCategory,Position) VALUES ('".$_POST["Employee_Name"]."','".$_POST["Employee_PhoneNumber"]."','".$_POST["Employee_Email"]."','".$_POST["Employee_SalCategory"]."','".$_POST["Employee_Position"]."')";
  
   mysql_query($query) or die(mysql_error());
   $idQuery = mysql_query('SELECT COUNT(*) FROM Employee') or die(mysql_error());
@@ -101,10 +104,10 @@ if (isset($_POST["Delivery_idDelivery"])) //I think this is useless check,but,wo
 else if(isset($_POST["Employee_Name"]))
 {
     if(strtotime(date("Y-m-d")) > strtotime( date("Y")."-".$_POST["sel_date_month"]."-".$_POST["sel_date_day"]) )
-        $query="INSERT INTO Delivery (Date) VALUES ('".date("Y").$_POST["sel_date_month"]."-".$_POST["sel_date_day"]."')";
+        $query="INSERT INTO Delivery (Date) VALUES ('".date("Y")."-".$_POST["sel_date_month"]."-".$_POST["sel_date_day"]."')";
     else
-        if(strtotime(date("Y-m-d")) > strtotime( (date("Y")+1).$_POST["sel_date_month"]."-".$_POST["sel_date_day"]) )
-        $query="INSERT INTO Delivery (Date) VALUES ('".date("Y").$_POST["sel_date_month"]."-".$_POST["sel_date_day"]."')";
+        if(strtotime(date("Y-m-d")) > strtotime( (date("Y")+1)."-".$_POST["sel_date_month"]."-".$_POST["sel_date_day"]) )
+        $query="INSERT INTO Delivery (Date) VALUES ('".date("Y")."-".$_POST["sel_date_month"]."-".$_POST["sel_date_day"]."')";
  
   mysql_query($query) or die(mysql_error());
   
@@ -124,7 +127,7 @@ if( $Delivery_idDelivery!=-1    &&
     $Employee_idEmployee!=-1
     )
 {
- $query="INSERT INTO Orders (DelID,ProdID,CustID,EmpID) VALUES ('".$Delivery_idDelivery."','".$Products_idProducts."','".$Customer_idCustomer."','".$Employee_idEmployee."')";
+ $query="INSERT INTO Orders (DelID,ProdID,CustID,EmpID) VALUES (".$Delivery_idDelivery.",".$Products_idProducts.",".$Customer_idCustomer.",".$Employee_idEmployee.")";
  mysql_query($query) or die(mysql_error());
  
  echo $query."<br>";

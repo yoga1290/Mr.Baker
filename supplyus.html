@@ -41,6 +41,7 @@ $("input#Products_Name").change(
                 }
                 txt+="<option value='-1'>Other</option>";
                 txt+="</select><br>";
+                txt+='<input type="number" min="0" placeholder="Quantity to Add" name="Products_NumberInStock" id="Products_NumberInStock"><br>';
                 $("#div_product").html(txt);
                 
                 
@@ -86,6 +87,7 @@ $("input#Products_Name").change(
                                                                     }
                                                                     txt+="<option value='-1'>Other</option>";
                                                                     txt+="</select><br>";
+                                                                    
                                                                     $("#div_Products_Supplier_Name").html(txt);
                 
                 
