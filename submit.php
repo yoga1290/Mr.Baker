@@ -7,6 +7,15 @@
 mysql_connect('fdb2.awardspace.com','yoga1290_project','yoga1290');
 @mysql_select_db('yoga1290_project') or die(mysql_error());
 
+// The STEPS SUMMARY:
+
+//IF idSuppliers isn't given , INSERT a new Supplier
+//IF idProducts isn't given , INSERT a new Product
+//IF idCustomer isn't given , INSERT a new Customer
+//IF idEmployee isn't given , INSERT a new Employee
+//...If everything is given (or INSERTed into the DB),use the IDs to form a new Order
+
+
 //INSERT INTO Suppliers
 
 $Suppliers_idSuppliers=-1;

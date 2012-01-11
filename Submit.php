@@ -7,6 +7,7 @@
 mysql_connect('fdb2.awardspace.com','yoga1290_project','yoga1290');
 @mysql_select_db('yoga1290_project') or die(mysql_error());
 
+//IF idSuppliers isn't given , INSERT a new Supplier
 //INSERT INTO Suppliers
 
 $Suppliers_idSuppliers=-1;
